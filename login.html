@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión - Empacas</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">Empacas</a>
+    <div class="nav-links">
+      <a href="tienda.html">Tienda</a>
+    </div>
+  </nav>
+
+  <main class="auth-container">
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <button class="tab active" data-tab="login">Iniciar sesión</button>
+        <button class="tab" data-tab="register">Registrarse</button>
+      </div>
+
+      <div id="login-form" class="auth-form">
+        <h2>Iniciar sesión</h2>
+        <form id="form-login">
+          <input type="email" name="email" placeholder="Correo electrónico" required>
+          <input type="password" name="password" placeholder="Contraseña" required>
+          <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+        </form>
+        <p id="login-error" class="error-msg"></p>
+      </div>
+
+      <div id="register-form" class="auth-form hidden">
+        <h2>Crear cuenta</h2>
+        <form id="form-register">
+          <input type="text" name="name" placeholder="Nombre completo">
+          <input type="email" name="email" placeholder="Correo electrónico" required>
+          <input type="password" name="password" placeholder="Contraseña (mín. 6 caracteres)" required minlength="6">
+          <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+        </form>
+        <p id="register-error" class="error-msg"></p>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    Auth.init();
+
+    // Tabs
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.onclick = () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.auth-form').forEach(f => f.classList.add('hidden'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab + '-form').classList.remove('hidden');
+      };
+    });
+
+    document.getElementById('form-login').onsubmit = async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const err = document.getElementById('login-error');
+      err.textContent = '';
+      const { email, password } = Object.fromEntries(new FormData(form));
+      const { error } = await Auth.login(email, password);
+      if (error) err.textContent = error;
+      else location.href = new URLSearchParams(location.search).get('redirect') || 'tienda.html';
+    };
+
+    document.getElementById('form-register').onsubmit = async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const err = document.getElementById('register-error');
+      err.textContent = '';
+      const { email, password } = Object.fromEntries(new FormData(form));
+      const { error } = await Auth.register(email, password);
+      if (error) err.textContent = error;
+      else location.href = new URLSearchParams(location.search).get('redirect') || 'tienda.html';
+    };
+  </script>
+</body>
+</html>

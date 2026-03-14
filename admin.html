@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin - Empacas</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">Empacas</a>
+    <div class="nav-links">
+      <a href="tienda.html">Tienda</a>
+      <a href="admin.html">Admin</a>
+      <button id="btn-logout" class="btn btn-outline">Cerrar sesión</button>
+    </div>
+  </nav>
+
+  <main class="admin-container">
+    <h1>Panel de administración</h1>
+    <p class="admin-desc">Valida los pagos por transferencia marcando los pedidos como completados.</p>
+    
+    <div id="admin-orders" class="admin-orders"></div>
+    <div id="admin-empty" class="admin-empty">
+      <p>No hay pedidos pendientes</p>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

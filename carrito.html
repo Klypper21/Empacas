@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito - Empacas</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">Empacas</a>
+    <div class="nav-links">
+      <a href="tienda.html">Tienda</a>
+      <a href="carrito.html">Carrito <span id="cart-count" class="badge">0</span></a>
+      <a href="pedidos.html">Mis Pedidos</a>
+      <a href="admin.html">Admin</a>
+      <button id="btn-login" class="btn btn-outline">Iniciar sesión</button>
+      <button id="btn-logout" class="btn btn-outline" style="display:none">Cerrar sesión</button>
+    </div>
+  </nav>
+
+  <main class="cart-container">
+    <h1>Tu carrito</h1>
+    <div id="cart-items"></div>
+    <div id="cart-empty" class="cart-empty">
+      <p>Tu carrito está vacío</p>
+      <a href="tienda.html" class="btn btn-primary">Ir a la tienda</a>
+    </div>
+    <div id="cart-summary" class="cart-summary hidden">
+      <p><strong>Total: <span id="cart-total">0</span> €</strong></p>
+      <button id="btn-checkout" class="btn btn-primary">Realizar pedido</button>
+    </div>
+  </main>
+
+  <!-- Modal de checkout -->
+  <div id="checkout-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Confirmar pedido - Transferencia bancaria</h2>
+      <p>Total a pagar: <strong id="modal-total">0</strong> €</p>
+      <p class="transfer-info">
+        <strong>Datos para transferencia:</strong><br>
+        IBAN: ES00 0000 0000 0000 0000 0000<br>
+        Concepto: <span id="order-ref">Pedido-XXX</span>
+      </p>
+      <p>Indica la referencia de tu transferencia (opcional):</p>
+      <input type="text" id="transfer-reference" placeholder="Ej: Transferencia 123">
+      <div class="modal-actions">
+        <button id="btn-cancel-order" class="btn btn-outline">Cancelar</button>
+        <button id="btn-confirm-order" class="btn btn-primary">Confirmar pedido (pago pendiente)</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/carrito.js"></script>
+</body>
+</html>
