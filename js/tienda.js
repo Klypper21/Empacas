@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div class="info">
           <h3>${escapeHtml(p.name)}</h3>
           <p>${escapeHtml(p.description || '')}</p>
-          <span class="price">${parseFloat(p.price).toFixed(2)} €</span>
+          <span class="price">${parseFloat(p.price).toFixed(2)} CUP</span>
           <button class="btn btn-primary btn-add-cart" style="margin-top:0.75rem;width:100%"
             data-id="${p.id}"
             data-name="${escapeAttr(p.name || '')}"
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     title.textContent = product.name;
     category.textContent = product.category || '';
     desc.textContent = product.description || 'Sin descripción.';
-    priceEl.textContent = parseFloat(product.price).toFixed(2) + ' €';
+    priceEl.textContent = parseFloat(product.price).toFixed(2) + ' CUP';
     stockEl.textContent =
       (product.stock ?? 10) > 0 ? `En stock (${product.stock})` : 'Agotado';
     stockEl.className = 'product-modal-stock ' + ((product.stock ?? 10) > 0 ? '' : 'out-of-stock');
