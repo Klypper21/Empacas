@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   Auth.init();
+  initHamburgerMenu();
   if (Auth.supabase) {
     updateNavAuth();
     updateCartCount();
@@ -9,6 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+function initHamburgerMenu() {
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  if (!hamburger || !navLinks) return;
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+}
 
 function updateNavAuth() {
   const btnLogin = document.getElementById('btn-login');
